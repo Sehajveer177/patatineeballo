@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Scopri dove sei!</title>
+  <style>
+    /* ANIMAZIONE SFONDO ARCOBALENO */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+      background: linear-gradient(270deg, 
+        red, orange, yellow, green, cyan, blue, violet);
+      background-size: 1400% 1400%;
+      animation: rainbow 20s ease infinite;
+    }
+
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      font-size: 2.8em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px #00000055;
+    }
+
+    #location {
+      font-size: 1.3em;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff88;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 90%;
+      backdrop-filter: blur(6px);
+    }
+
+    button {
+      background-color: #ffffffcc;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      padding: 15px 25px;
+      font-size: 1em;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #ffffff;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <h1>Scopri dove ti trovi!</h1>
+
+  <button onclick="getLocation()">Mostra la mia posizione</button>
+  <div id="location">Premi il pulsante per vedere la tua posizione.</div>
+
+  <button onclick="window.open('https://www.youtube.com/watch?v=r5_NvFTfAWc', '_blank')">
+    Clicca su di me
+  </button>
+
+  <button onclick="window.open('https://www.youtube.com/watch?v=clMG5Zy_N-U', '_blank')">
+    Metti le patatine nel sacchetto
+  </button>
+
+  <script>
+    function getLocation() {
+      const locationDiv = document.getElementById("location");
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            locationDiv.innerHTML = `📍 La tua posizione è:<br>🌐 Latitudine: ${lat.toFixed(6)}<br>🌐 Longitudine: ${lon.toFixed(6)}`;
+          },
+          (error) => {
+            locationDiv.innerHTML = "⚠️ Impossibile ottenere la posizione: " + error.message;
+          }
+        );
+      } else {
+        locationDiv.innerHTML = "❌ Il tuo browser non supporta la geolocalizzazione.";
+      }
+    }
+  </script>
+</body>
+</html>
