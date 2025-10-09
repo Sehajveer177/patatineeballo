@@ -69,13 +69,8 @@
   <button onclick="getLocation()">Mostra la mia posizione</button>
   <div id="location">Premi il pulsante per vedere la tua posizione.</div>
 
-  <button onclick="window.open('https://www.youtube.com/watch?v=r5_NvFTfAWc', '_blank')">
-    Clicca su di me
-  </button>
-
-  <button onclick="window.open('https://www.youtube.com/watch?v=clMG5Zy_N-U', '_blank')">
-    Metti le patatine nel sacchetto
-  </button>
+  <!-- Pulsante modificato -->
+  <button onclick="showMessage()">Clicca su di me</button>
 
   <script>
     function getLocation() {
@@ -95,6 +90,10 @@
       } else {
         locationDiv.innerHTML = "❌ Il tuo browser non supporta la geolocalizzazione.";
       }
+    }
+
+    function showMessage() {
+      alert("🎉 Sei un grande!");
     }
   </script>
 </body>
