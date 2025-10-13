@@ -13,11 +13,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: start;
       text-align: center;
       color: #fff;
-      background: linear-gradient(270deg, 
-        red, orange, yellow, green, cyan, blue, violet);
+      background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet);
       background-size: 1400% 1400%;
       animation: rainbow 20s ease infinite;
     }
@@ -30,11 +29,12 @@
 
     h1 {
       font-size: 2.8em;
+      margin-top: 40px;
       margin-bottom: 20px;
       text-shadow: 2px 2px 8px #00000055;
     }
 
-    #location {
+    #location, #messaggioSaluto {
       font-size: 1.3em;
       background-color: rgba(255, 255, 255, 0.2);
       border: 2px solid #ffffff88;
@@ -61,18 +61,75 @@
       background-color: #ffffff;
       transform: scale(1.05);
     }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .clickabile {
+      cursor: pointer;
+      color: #ff0;
+      font-weight: bold;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      margin: 5px;
+      font-size: 1em;
+    }
+
+    form {
+      margin-top: 20px;
+    }
   </style>
+
+  <!-- JavaScript nell'header -->
+  <script>
+    function cambiaTitolo() {
+      document.getElementById("titolo").style.color = "blue";
+      document.getElementById("titolo").innerText = "Hai passato il mouse sul titolo!";
+    }
+
+    function showMessage() {
+      alert("🎉 Sei un grande!");
+    }
+  </script>
 </head>
 <body>
-  <h1>Scopri dove ti trovi!</h1>
+  <h1 id="titolo" onmouseover="cambiaTitolo()">Scopri dove ti trovi!</h1>
 
+  <!-- Pulsante Geolocalizzazione -->
   <button onclick="getLocation()">Mostra la mia posizione</button>
   <div id="location">Premi il pulsante per vedere la tua posizione.</div>
 
-  <!-- Pulsante modificato -->
+  <!-- Pulsante Messaggio -->
   <button onclick="showMessage()">Clicca su di me</button>
 
+  <!-- Nuovi elementi DOM / JS -->
+  <input type="text" id="nomeInput" placeholder="Inserisci il tuo nome">
+  <button id="btnSaluta">Saluta</button>
+  <p id="messaggioSaluto"></p>
+
+  <button id="btnAggiungi">Aggiungi elemento alla lista</button>
+  <ul id="lista"></ul>
+
+  <form id="formEmail">
+    <input type="email" id="email" placeholder="Inserisci la tua email">
+    <button type="submit">Invia</button>
+  </form>
+
+  <div id="contenitore">
+    <p id="paragrafoRimuovibile" class="clickabile">Cliccami per rimuovermi</p>
+  </div>
+
+  <p>Premi un tasto qualsiasi sulla tastiera (guarda la console)</p>
+
+  <!-- JS in fondo (simula file esterno) -->
   <script>
+    // Geolocalizzazione
     function getLocation() {
       const locationDiv = document.getElementById("location");
 
@@ -92,9 +149,54 @@
       }
     }
 
-    function showMessage() {
-      alert("🎉 Sei un grande!");
-    }
+    // Eventi e DOM
+    document.getElementById("btnSaluta").addEventListener("click", function () {
+      const nome = document.getElementById("nomeInput").value;
+      document.getElementById("messaggioSaluto").textContent = "Ciao, " + nome + "!";
+    });
+
+    document.getElementById("btnAggiungi").addEventListener("click", function () {
+      const nuovoElemento = document.createElement("li");
+      nuovoElemento.textContent = "Nuovo elemento aggiunto!";
+      document.getElementById("lista").appendChild(nuovoElemento);
+    });
+
+    document.getElementById("formEmail").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      alert("Email inviata: " + email);
+    });
+
+    document.getElementById("paragrafoRimuovibile").addEventListener("click", function () {
+      const p = document.getElementById("paragrafoRimuovibile");
+      p.parentNode.removeChild(p);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      console.log("Tasto premuto: " + e.key);
+    });
+
+    document.getElementById("email").addEventListener("change", function () {
+      console.log("Email modificata: " + this.value);
+    });
+
+    document.getElementById("nomeInput").addEventListener("focus", function () {
+      this.style.backgroundColor = "#e0f7fa";
+    });
+
+    document.getElementById("nomeInput").addEventListener("blur", function () {
+      this.style.backgroundColor = "white";
+    });
+
+    document.getElementById("titolo").addEventListener("dblclick", function () {
+      this.textContent = "Hai fatto doppio clic!";
+      this.style.color = "red";
+    });
+
+    document.getElementById("titolo").addEventListener("mouseout", function () {
+      this.textContent = "Scopri dove ti trovi!";
+      this.style.color = "#fff";
+    });
   </script>
 </body>
 </html>
