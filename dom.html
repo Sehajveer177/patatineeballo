@@ -2,13 +2,14 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Funzioni DOM</title>
+  <title>Eventi DOM</title>
   <style>
     body {
-      font-family: sans-serif;
-      background: #f0f0f0;
-      padding: 20px;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fafafa;
+      color: #333;
       text-align: center;
+      padding: 30px;
     }
 
     input, button {
@@ -19,30 +20,40 @@
 
     #messaggioSaluto, #lista {
       margin-top: 20px;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
     }
 
     .clickabile {
       cursor: pointer;
-      color: blue;
+      color: red;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1 id="titolo">Pagina DOM</h1>
+  <h1 id="titolo">Pagina Eventi DOM</h1>
 
+  <!-- Input nome + saluto -->
   <input type="text" id="nomeInput" placeholder="Inserisci il tuo nome">
   <button id="btnSaluta">Saluta</button>
   <p id="messaggioSaluto"></p>
 
+  <!-- Aggiunta elementi alla lista -->
   <button id="btnAggiungi">Aggiungi elemento alla lista</button>
   <ul id="lista"></ul>
 
+  <!-- Form email -->
   <form id="formEmail">
     <input type="email" id="email" placeholder="Inserisci la tua email">
     <button type="submit">Invia</button>
   </form>
 
+  <!-- Rimozione paragrafo -->
   <div id="contenitore">
     <p id="paragrafoRimuovibile" class="clickabile">Cliccami per rimuovermi</p>
   </div>
@@ -68,8 +79,7 @@
     });
 
     document.getElementById("paragrafoRimuovibile").addEventListener("click", function () {
-      const p = document.getElementById("paragrafoRimuovibile");
-      p.parentNode.removeChild(p);
+      this.remove();
     });
 
     document.addEventListener("keydown", function (e) {
@@ -94,8 +104,8 @@
     });
 
     document.getElementById("titolo").addEventListener("mouseout", function () {
-      this.textContent = "Pagina DOM";
-      this.style.color = "#000";
+      this.textContent = "Pagina Eventi DOM";
+      this.style.color = "#333";
     });
   </script>
 </body>
