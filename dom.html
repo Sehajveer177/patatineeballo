@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Funzioni DOM</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f0f0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1em;
+    }
+
+    #messaggioSaluto, #lista {
+      margin-top: 20px;
+    }
+
+    .clickabile {
+      cursor: pointer;
+      color: blue;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="titolo">Pagina DOM</h1>
+
+  <input type="text" id="nomeInput" placeholder="Inserisci il tuo nome">
+  <button id="btnSaluta">Saluta</button>
+  <p id="messaggioSaluto"></p>
+
+  <button id="btnAggiungi">Aggiungi elemento alla lista</button>
+  <ul id="lista"></ul>
+
+  <form id="formEmail">
+    <input type="email" id="email" placeholder="Inserisci la tua email">
+    <button type="submit">Invia</button>
+  </form>
+
+  <div id="contenitore">
+    <p id="paragrafoRimuovibile" class="clickabile">Cliccami per rimuovermi</p>
+  </div>
+
+  <p>Premi un tasto qualsiasi sulla tastiera (guarda la console)</p>
+
+  <script>
+    document.getElementById("btnSaluta").addEventListener("click", function () {
+      const nome = document.getElementById("nomeInput").value;
+      document.getElementById("messaggioSaluto").textContent = "Ciao, " + nome + "!";
+    });
+
+    document.getElementById("btnAggiungi").addEventListener("click", function () {
+      const nuovoElemento = document.createElement("li");
+      nuovoElemento.textContent = "Nuovo elemento aggiunto!";
+      document.getElementById("lista").appendChild(nuovoElemento);
+    });
+
+    document.getElementById("formEmail").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      alert("Email inviata: " + email);
+    });
+
+    document.getElementById("paragrafoRimuovibile").addEventListener("click", function () {
+      const p = document.getElementById("paragrafoRimuovibile");
+      p.parentNode.removeChild(p);
+    });
+
+    document.addEventListener("keydown", function (e) {
+      console.log("Tasto premuto: " + e.key);
+    });
+
+    document.getElementById("email").addEventListener("change", function () {
+      console.log("Email modificata: " + this.value);
+    });
+
+    document.getElementById("nomeInput").addEventListener("focus", function () {
+      this.style.backgroundColor = "#e0f7fa";
+    });
+
+    document.getElementById("nomeInput").addEventListener("blur", function () {
+      this.style.backgroundColor = "white";
+    });
+
+    document.getElementById("titolo").addEventListener("dblclick", function () {
+      this.textContent = "Hai fatto doppio clic!";
+      this.style.color = "red";
+    });
+
+    document.getElementById("titolo").addEventListener("mouseout", function () {
+      this.textContent = "Pagina DOM";
+      this.style.color = "#000";
+    });
+  </script>
+</body>
+</html>
