@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>Scopri dove sei!</title>
   <style>
-    /* SFONDO STELLATO */
+    /* ANIMAZIONE SFONDO ARCOBALENO */
     body {
       margin: 0;
       padding: 0;
@@ -16,38 +16,33 @@
       justify-content: start;
       text-align: center;
       color: #fff;
-      background: black;
-      overflow: hidden;
-      position: relative;
+      background: linear-gradient(270deg, red, orange, yellow, green, cyan, blue, violet);
+      background-size: 1400% 1400%;
+      animation: rainbow 20s ease infinite;
     }
 
-    /* Stelle animate con pseudo-elementi */
-    body::before {
-      content: '';
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      background: transparent;
-      box-shadow:
-        100px 200px white, 150px 300px white, 250px 50px white,
-        400px 400px white, 500px 100px white, 600px 300px white,
-        700px 200px white, 800px 400px white, 900px 50px white,
-        1000px 300px white, 1100px 100px white, 1200px 400px white;
-      animation: twinkle 10s linear infinite;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { transform: translate(0,0); opacity: 0.8; }
-      50% { transform: translate(-100px, -50px); opacity: 0.3; }
+    @keyframes rainbow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
     h1 {
       font-size: 2.8em;
       margin-top: 40px;
       margin-bottom: 20px;
-      text-shadow: 2px 2px 8px #00000088;
-      z-index: 1;
-      position: relative;
+      text-shadow: 2px 2px 8px #00000055;
+    }
+
+    #location {
+      font-size: 1.3em;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff88;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 90%;
+      backdrop-filter: blur(6px);
     }
 
     button {
@@ -60,8 +55,6 @@
       cursor: pointer;
       margin: 10px;
       transition: background-color 0.3s ease, transform 0.2s ease;
-      z-index: 1;
-      position: relative;
     }
 
     button:hover {
@@ -84,12 +77,34 @@
     function showMessage() {
       alert("🎉 Sei un grande!");
     }
+
+    function getLocation() {
+      const locationDiv = document.getElementById("location");
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            locationDiv.innerHTML = `📍 La tua posizione è:<br>🌐 Latitudine: ${lat.toFixed(6)}<br>🌐 Longitudine: ${lon.toFixed(6)}`;
+          },
+          (error) => {
+            locationDiv.innerHTML = "⚠️ Impossibile ottenere la posizione: " + error.message;
+          }
+        );
+      } else {
+        locationDiv.innerHTML = "❌ Il tuo browser non supporta la geolocalizzazione.";
+      }
+    }
   </script>
 </head>
 <body>
   <h1 id="titolo" onmouseover="cambiaTitolo()" onmouseout="this.innerText='Scopri dove ti trovi!'; this.style.color='#fff';">
     Scopri dove ti trovi!
   </h1>
+
+  <button onclick="getLocation()">Mostra la mia posizione</button>
+  <div id="location">Premi il pulsante per vedere la tua posizione.</div>
 
   <button onclick="showMessage()">Clicca su di me</button>
 
@@ -99,3 +114,4 @@
   </a>
 </body>
 </html>
+
