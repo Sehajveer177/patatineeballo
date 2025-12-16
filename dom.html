@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Eventi DOM</title>
   <style>
-    /* Stile base della pagina */
     body {
       font-family: 'Segoe UI', sans-serif;
       background-color: #f2f2f2;
@@ -13,15 +12,13 @@
       padding: 30px;
     }
 
-    /* Stile per input e button */
     input, button {
       padding: 10px;
       margin: 10px;
       font-size: 1em;
     }
 
-    /* Stile per elementi che mostrano messaggi */
-    #messaggioSaluto, #lista, #outputKey, #hoverBox {
+    #messaggioSaluto, #lista, #outputKey, #hoverBox, #messaggioEmail {
       margin-top: 20px;
       font-weight: bold;
     }
@@ -31,14 +28,12 @@
       padding: 0;
     }
 
-    /* Classe per elementi cliccabili */
     .clickabile {
       cursor: pointer;
       color: red;
       font-weight: bold;
     }
 
-    /* Stile per la box che reagisce al passaggio del mouse */
     #hoverBox {
       width: 200px;
       height: 100px;
@@ -47,7 +42,6 @@
       line-height: 100px;
     }
 
-    /* Stile input con focus */
     #focusInput {
       border: 2px solid #ccc;
       padding: 10px;
@@ -58,7 +52,7 @@
 
   <h1 id="titolo">Eventi DOM in azione</h1>
 
-  <!-- 1. Click: pulsante per salutare -->
+  <!-- 1. Click -->
   <button id="btnSaluta">Saluta</button>
   <input type="text" id="nomeInput" placeholder="Inserisci il tuo nome">
   <p id="messaggioSaluto"></p>
@@ -66,14 +60,14 @@
   <!-- 2. Doppio click -->
   <p id="paragrafoDoppioClick" class="clickabile">Doppio cliccami!</p>
 
-  <!-- 3. mouseover + 4. mouseout -->
+  <!-- 3 + 4. Mouse -->
   <div id="hoverBox">Passa qui sopra</div>
 
-  <!-- 5. keydown + 6. keyup -->
+  <!-- 5 + 6. Tastiera -->
   <input type="text" id="tastieraInput" placeholder="Scrivi qualcosa">
   <p id="outputKey"></p>
 
-  <!-- 7. change su select -->
+  <!-- 7. Select -->
   <select id="selezionaColore">
     <option value="">--Scegli un colore--</option>
     <option value="red">Rosso</option>
@@ -82,73 +76,71 @@
   </select>
   <p id="coloreSelezionato"></p>
 
-  <!-- 8. focus + 9. blur -->
+  <!-- 8 + 9. Focus -->
   <input type="text" id="focusInput" placeholder="Clicca qui per vedere l'effetto">
 
-  <!-- 10. submit su form -->
-  <form id="formEmail">
-    <input type="email" id="email" placeholder="Inserisci la tua email">
-    <button type="submit">Invia</button>
-  </form>
+  <!-- 10. EMAIL (MODIFICATA) -->
+  <input type="email" id="email" placeholder="Inserisci la tua email">
+  <button id="btnEmail">Mostra mail</button>
+  <p id="messaggioEmail"></p>
 
   <script>
-    // 1. click sul pulsante "Saluta"
     document.getElementById("btnSaluta").addEventListener("click", function () {
-      const nome = document.getElementById("nomeInput").value; // Legge il valore dell'input
-      document.getElementById("messaggioSaluto").textContent = "Ciao, " + nome + "!"; // Mostra messaggio
+      const nome = document.getElementById("nomeInput").value;
+      document.getElementById("messaggioSaluto").textContent = "Ciao, " + nome + "!";
     });
 
-    // 2. dblclick sul paragrafo
     document.getElementById("paragrafoDoppioClick").addEventListener("dblclick", function () {
-      this.textContent = "Hai fatto doppio clic!"; // Cambia testo
-      this.style.color = "green"; // Cambia colore del testo
+      this.textContent = "Hai fatto doppio clic!";
+      this.style.color = "green";
     });
 
-    // 3. mouseover sulla box
     document.getElementById("hoverBox").addEventListener("mouseover", function () {
-      this.textContent = "Stai passando sopra!"; // Cambia testo
-      this.style.backgroundColor = "#ffd54f"; // Cambia colore sfondo
+      this.textContent = "Stai passando sopra!";
+      this.style.backgroundColor = "#ffd54f";
     });
 
-    // 4. mouseout sulla box
     document.getElementById("hoverBox").addEventListener("mouseout", function () {
-      this.textContent = "Passa qui sopra"; // Ripristina testo
-      this.style.backgroundColor = "#cfe8fc"; // Ripristina colore sfondo
+      this.textContent = "Passa qui sopra";
+      this.style.backgroundColor = "#cfe8fc";
     });
 
-    // 5. keydown sull'input tastiera
     document.getElementById("tastieraInput").addEventListener("keydown", function (e) {
-      document.getElementById("outputKey").textContent = "Hai premuto: " + e.key; // Mostra tasto premuto
+      document.getElementById("outputKey").textContent = "Hai premuto: " + e.key;
     });
 
-    // 6. keyup sull'input tastiera
     document.getElementById("tastieraInput").addEventListener("keyup", function (e) {
-      console.log("Rilasciato: " + e.key); // Mostra in console tasto rilasciato
+      console.log("Rilasciato: " + e.key);
     });
 
-    // 7. change sulla select dei colori
     document.getElementById("selezionaColore").addEventListener("change", function () {
-      const colore = this.value; // Prende il valore selezionato
-      document.getElementById("coloreSelezionato").textContent = "Hai scelto: " + colore; // Mostra colore
-      document.body.style.backgroundColor = colore || "#f2f2f2"; // Cambia colore sfondo pagina
+      const colore = this.value;
+      document.getElementById("coloreSelezionato").textContent = "Hai scelto: " + colore;
+      document.body.style.backgroundColor = colore || "#f2f2f2";
     });
 
-    // 8. focus sull'input
     document.getElementById("focusInput").addEventListener("focus", function () {
-      this.style.borderColor = "blue"; // Cambia bordo quando focus
+      this.style.borderColor = "blue";
     });
 
-    // 9. blur sull'input
     document.getElementById("focusInput").addEventListener("blur", function () {
-      this.style.borderColor = "#ccc"; // Ripristina bordo quando focus perso
+      this.style.borderColor = "#ccc";
     });
 
-    // 10. submit del form
-    document.getElementById("formEmail").addEventListener("submit", function (e) {
-      e.preventDefault(); // Impedisce invio reale del form
-      const email = document.getElementById("email").value; // Prende valore email
-      alert("Email inviata: " + email); // Mostra alert con email
+    // 🔹 10. Mostra la mail inserita
+    document.getElementById("btnEmail").addEventListener("click", function () {
+      const email = document.getElementById("email").value;
+      const messaggio = document.getElementById("messaggioEmail");
+
+      if (email === "") {
+        messaggio.textContent = "Non hai inserito nessuna mail!";
+        messaggio.style.color = "red";
+      } else {
+        messaggio.textContent = "La tua mail è: " + email;
+        messaggio.style.color = "green";
+      }
     });
   </script>
+
 </body>
 </html>
