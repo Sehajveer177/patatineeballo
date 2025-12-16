@@ -41,11 +41,6 @@
       margin: 20px auto;
       line-height: 100px;
     }
-
-    #focusInput {
-      border: 2px solid #ccc;
-      padding: 10px;
-    }
   </style>
 </head>
 <body>
@@ -76,10 +71,7 @@
   </select>
   <p id="coloreSelezionato"></p>
 
-  <!-- 8 + 9. Focus -->
-  <input type="text" id="focusInput" placeholder="Clicca qui per vedere l'effetto">
-
-  <!-- 10. EMAIL (MODIFICATA) -->
+  <!-- 10. EMAIL -->
   <input type="email" id="email" placeholder="Inserisci la tua email">
   <button id="btnEmail">Mostra mail</button>
   <p id="messaggioEmail"></p>
@@ -119,15 +111,7 @@
       document.body.style.backgroundColor = colore || "#f2f2f2";
     });
 
-    document.getElementById("focusInput").addEventListener("focus", function () {
-      this.style.borderColor = "blue";
-    });
-
-    document.getElementById("focusInput").addEventListener("blur", function () {
-      this.style.borderColor = "#ccc";
-    });
-
-    // 🔹 10. Mostra la mail inserita
+    // 🔹 Mostra la mail inserita
     document.getElementById("btnEmail").addEventListener("click", function () {
       const email = document.getElementById("email").value;
       const messaggio = document.getElementById("messaggioEmail");
