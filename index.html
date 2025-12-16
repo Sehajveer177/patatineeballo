@@ -21,13 +21,23 @@
 
     h1 {
       font-size: 3em;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       text-shadow: 2px 2px 8px #00000033;
     }
 
     p {
-      font-size: 1.4em;
-      margin-bottom: 30px;
+      font-size: 1.3em;
+      margin-bottom: 20px;
+    }
+
+    #storia {
+      max-width: 600px;
+      font-size: 1.2em;
+      background-color: rgba(255, 255, 255, 0.85);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+      display: none; /* nascosto all'inizio */
     }
 
     button {
@@ -36,7 +46,7 @@
       border: none;
       border-radius: 10px;
       padding: 15px 30px;
-      font-size: 1.1em;
+      font-size: 1.05em;
       cursor: pointer;
       margin: 10px;
       transition: background-color 0.3s ease, transform 0.2s ease;
@@ -56,6 +66,11 @@
     function showMessage() {
       alert("🎉 Sei un grande!");
     }
+
+    function mostraStoria() {
+      const storia = document.getElementById("storia");
+      storia.style.display = "block";
+    }
   </script>
 </head>
 
@@ -66,6 +81,13 @@
   <p>Benvenuto nel sito di <strong>SINGH</strong> 😎</p>
 
   <button onclick="showMessage()">Clicca su di me</button>
+
+  <button onclick="mostraStoria()">Chi è Singh?</button>
+
+  <div id="storia">
+    Singh è un normalissimo ragazzo di <strong>17 anni</strong> che frequenta
+    l’<strong>ITIS Paleocapa</strong>.
+  </div>
 
   <a href="dom.html">
     <button>Vai alla pagina Eventi DOM</button>
